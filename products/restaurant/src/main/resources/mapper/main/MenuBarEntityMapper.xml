@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.MenuBarMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.MenuBarEntity">
+        <id column="menu_bar_id" property="menuBarId" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="url" property="url" />
+        <result column="order" property="order" />
+        <result column="parent" property="parent" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <resultMap id="SimpleResultMap" type="com.myBusiness.products.restaurant.entity.MenuBarEntity">
+        <id column="menu_bar_id" property="menuBarId" />
+        <result column="name" property="name" />
+        <result column="url" property="url" />
+    </resultMap>
+
+    <resultMap id="SimpleFullResultMap" type="com.myBusiness.products.restaurant.entity.MenuBarEntity" extends="SimpleResultMap">
+        <collection property="sonMenuBars" column="{parent=menu_bar_id,role_id=role_id}" select="findSonMenuBars" ofType="com.myBusiness.products.restaurant.entity.MenuBarEntity" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        menu_bar_id, name, description, url, order, parent, enable
+    </sql>
+
+    <sql id="Simple_Column_List">
+        ${alias}.menu_bar_id, ${alias}.name, ${alias}.url
+    </sql>
+
+    <select id="findMenuBarByRoleId" parameterType="java.lang.Long" resultMap="SimpleFullResultMap">
+        select
+            t2.menu_bar_id , t2.name , t2.url,t1.role_id
+        from menu_bar_for_role t1, menu_bar t2
+        where
+        t1.menu_bar_id = t2.menu_bar_id
+        and t1.role_id = #{roleId}
+        and t2.enable = true
+        and ifnull(t2.parent,'') = ''
+    </select>
+
+    <select id="findSonMenuBars" resultMap="SimpleResultMap">
+        select
+            t2.menu_bar_id , t2.name, t2.url
+        from menu_bar_for_role t1, menu_bar t2
+        where t1.menu_bar_id = t2.menu_bar_id
+        and t1.role_id = #{role_id}
+        and t2.parent = #{parent}
+        and t2.enable = true
+    </select>
+
+    <select id="exists" parameterType="java.lang.Long" resultType="java.lang.Boolean">
+        select 1 from menu_bar where menu_bar_id = #{menuBarId}
+    </select>
+
+</mapper>

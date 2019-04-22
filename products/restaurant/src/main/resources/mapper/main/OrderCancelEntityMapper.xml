@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.OrderCancelMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.OrderCancelEntity">
+        <id column="cancel_id" property="cancelId" />
+        <result column="user_id" property="userId" />
+        <result column="cancel_date" property="cancelDate" />
+        <result column="cancel_reason" property="cancelReason" />
+        <result column="cancel_remark" property="cancelRemark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cancel_id, user_id, cancel_date, cancel_reason, cancel_remark
+    </sql>
+
+</mapper>

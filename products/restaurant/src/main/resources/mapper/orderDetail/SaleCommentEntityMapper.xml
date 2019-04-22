@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.orderDetail.SaleCommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.SaleCommentEntity">
+        <id column="goods_id" property="goodsId" />
+        <result column="order_id" property="orderId" />
+        <result column="user_id" property="userId" />
+        <result column="comment" property="comment" />
+        <result column="comment_date" property="commentDate" />
+        <result column="review" property="review" />
+        <result column="review_date" property="reviewDate" />
+        <result column="score" property="score" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        goods_id, order_id, user_id, comment, comment_date, review, review_date, score
+    </sql>
+
+    <!--<insert id="insertIfNotExists">-->
+        <!--insert-->
+        <!--${targetTable}-->
+        <!--(goods_id,order_id,user_id,comment,comment_date,review,review_date,score)-->
+        <!--value-->
+        <!--select #{goodsId},#{orderId},#{userId},#{comment},#{comment_date},null,null,#{score} from dual-->
+        <!--where not exists(select 1 from #{targetTable} where goodsId=#{goodsId} and orderId=#{orderId})-->
+    <!--</insert>-->
+
+</mapper>

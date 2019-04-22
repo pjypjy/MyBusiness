@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.SaleSituationDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.SaleSituationDetailEntity">
+        <id column="goods_id" property="goodsId" />
+        <result column="date" property="date" />
+        <result column="amount" property="amount" />
+        <result column="score_5" property="score5" />
+        <result column="score_4" property="score4" />
+        <result column="score_3" property="score3" />
+        <result column="score_2" property="score2" />
+        <result column="score_1" property="score1" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        goods_id, date, amount, score_5, score_4, score_3, score_2, score_1
+    </sql>
+
+    <update id="updateSituation">
+      insert sale_situation_detail (goods_id,date,amount,score_5,score_4,score_3,score_2,score_1)
+      values (#{goodsId},#{date},#{amount},0,0,0,0,0)
+        on duplicate key update
+        amount = amount + #{amount}
+    </update>
+
+    <update id="updateEvaluate">
+        update sale_situation_detail set
+        <choose>
+            <when test="score == 5">
+                score_5 = score_5 + 1
+            </when>
+            <when test="score == 4">
+                score_4 = score_4 + 1
+            </when>
+            <when test="score == 3">
+                score_3 = score_3 + 1
+            </when>
+            <when test="score == 2">
+                score_2 = score_2 + 1
+            </when>
+            <otherwise>
+                score_1 = score_1 + 1
+            </otherwise>
+        </choose>
+        where goods_id = #{goodsId} and date = #{date}
+    </update>
+
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.GoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.GoodsEntity">
+        <id column="goods_id" property="goodsId" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="img" property="img" />
+        <result column="price" property="price" />
+        <result column="enableAmount" property="enableAmount" />
+        <result column="amount" property="amount" />
+        <result column="enableDiscount" property="enableDiscount" />
+        <result column="discount" property="discount" />
+        <result column="enable" property="enable" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        goods_id, name, description, img, price, enableAmount, amount, enableDiscount, discount, enable, version
+    </sql>
+
+    <update id="changeAmount">
+        update goods
+        set amount = amount + #{arg1}
+        where goods_id = #{arg0} and amount + #{arg1} >= 0
+    </update>
+
+    <update id="testDySql">
+      update goods
+      <set>
+          <choose>
+              <when test="arg1 >= 0">
+                  amount = amount + #{arg1}
+              </when>
+              <otherwise>
+                  amount = amount + abs(#{arg1}) * 2
+              </otherwise>
+          </choose>
+      </set>
+        where goods_id = #{arg0}
+    </update>
+
+</mapper>

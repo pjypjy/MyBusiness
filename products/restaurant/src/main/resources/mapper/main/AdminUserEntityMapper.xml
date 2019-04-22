@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.AdminUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.AdminUserEntity">
+        <id column="user_id" property="userId" />
+        <result column="login_id" property="loginId" />
+        <result column="name" property="name" />
+        <result column="phone" property="phone" />
+        <result column="role_id" property="roleId" />
+        <result column="local_password" property="localPassword" />
+        <result column="password_suffix" property="passwordSuffix" />
+        <result column="birthday" property="birthday" />
+        <result column="sex" property="sex" />
+        <result column="token" property="token" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, login_id, name, phone, role_id, local_password, password_suffix, birthday, sex, token,enable
+    </sql>
+
+    <select id="exists" parameterType="java.lang.Long" resultType="java.lang.Boolean">
+        select 1 from admin_user where user_id = #{userId}
+    </select>
+
+</mapper>

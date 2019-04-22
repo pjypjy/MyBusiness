@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.MyMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.MyMenuEntity">
+        <id column="user_id" property="userId" />
+        <result column="index" property="index" />
+        <result column="menu_name" property="menuName" />
+        <result column="create_date" property="createDate" />
+        <result column="last_update_date" property="lastUpdateDate" />
+        <result column="goods_info" property="goodsInfo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, `index`, menu_name, create_date, last_update_date, goods_info
+    </sql>
+
+    <insert id="insert">
+        insert my_menu (user_id, `index`, menu_name,goods_info)
+            select
+                #{userId},
+                case ifnull(max(`index`),'') when '' then 0 else max(`index`) end + 1,
+                #{menuName},
+                #{goodsInfo}
+            from my_menu where user_id = #{userId};
+    </insert>
+
+</mapper>

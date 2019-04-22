@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.UserAuthMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.UserAuthEntity">
+        <id column="user_id" property="userId" />
+        <result column="phone" property="phone" />
+        <result column="local_password" property="localPassword" />
+        <result column="password_suffix" property="passwordSuffix" />
+        <result column="token" property="token" />
+        <result column="we_chat_open_id" property="weChatOpenId" />
+        <result column="we_chat_session_key" property="weChatSessionKey" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, phone, local_password, password_suffix, token, we_chat_open_id, we_chat_session_key
+    </sql>
+
+</mapper>

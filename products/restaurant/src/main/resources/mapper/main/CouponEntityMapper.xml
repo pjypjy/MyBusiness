@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.CouponMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.CouponEntity">
+        <id column="coupon_id" property="couponId" />
+        <result column="author_user_id" property="authorUserId" />
+        <result column="type" property="type" />
+        <result column="status" property="status" />
+        <result column="discount" property="discount" />
+        <result column="offset_money" property="offsetMoney" />
+        <result column="require_money" property="requireMoney" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="distribute_user_id" property="distributeUserId" />
+        <result column="start_date" property="startDate" />
+        <result column="expire_date" property="expireDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        coupon_id, author_user_id, type, status, discount, offset_money, require_money, create_user_id, distribute_user_id
+    </sql>
+
+</mapper>

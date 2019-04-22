@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myBusiness.products.restaurant.dao.main.MenuBarForRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.myBusiness.products.restaurant.entity.MenuBarForRoleEntity">
+        <id column="role_id" property="roleId" />
+        <result column="menu_bar_id" property="menuBarId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        role_id, menu_bar_id
+    </sql>
+
+    <select id="exists" resultType="java.lang.Boolean">
+        select 1 from menu_bar_for_role where role_id = #{arg0} and menu_bar_id = #{arg1}
+    </select>
+
+</mapper>
